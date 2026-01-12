@@ -2,9 +2,8 @@ name: 周三周五工作提醒
 
 on:
   schedule:
-    # UTC时间每周三、五早上7点执行（对应北京时间下午3点）
-    - cron: '0 7 * * 3,5'
-  workflow_dispatch: # 允许手动触发测试
+    - cron: '0 6 * * 3,5' # UTC早6点，即北京下午2点
+  workflow_dispatch:
 
 jobs:
   send-message:
@@ -17,7 +16,8 @@ jobs:
             -d '{
               "msgtype": "markdown",
               "markdown": {
-                "content": "**📅 每周三 & 周五 · 下午3点前请完成**\n\n### 一、更新禅道任务\n**要求**：更新到**今天实际完成**的内容和工时，禁止虚报。\n**重要提醒**：\n1.  如任务延期未完成，请及时更新截止时间。\n2.  任务实际完成时间应尽量在截止日期前，避免出现大面积的红色延期提示。\n\n**参考规范**：\n- 📊 **禅道操作规范 (Excel)**：[点击查看](https://vd9f7c2663.docs.qq.com/sheet/DR2tPZHN0cWhLcUh2dmFxa0ZF?tab=000001)\n- 🎬 **禅道操作规范 (PPT)**：[点击查看](https://vd9f7c2663.docs.qq.com/slide/DUXpMdWtVRnpMUU5jWHBZeHVI)\n\n### 二、更新月度版本进度表\n**文档链接**：📈 **[每月版本进度表](https://vd9f7c2663.docs.qq.com/desktop/mydoc/folder/FrklJEZfoWnIaodTPI)**\n\n### 三、补充会议纪要\n**文档链接**：🗓️ **[2026年会议纪要](https://vd9f7c2663.docs.qq.com/sheet/DRkhpeEhRTUdSbkdrTHRadUtE?tab=000001)**"
-              }
+                "content": "<@all>\n**📅 每周三 & 周五 · 下午3点前请完成**\n\n### 一、更新禅道任务\n**要求**：更新到**今天实际完成**的内容和工时，禁止虚报。\n**重要提醒**：\n1.  如任务延期未完成，请及时更新截止时间。\n2.  任务实际完成时间应尽量在截止日期前，避免出现大面积的红色延期提示。\n\n**参考规范**：\n- 📊 **禅道操作规范 (Excel)**：[点击查看](https://vd9f7c2663.docs.qq.com/sheet/DR2tPZHN0cWhLcUh2dmFxa0ZF?tab=000001)\n- 🎬 **禅道操作规范 (PPT)**：[点击查看](https://vd9f7c2663.docs.qq.com/slide/DUXpMdWtVRnpMUU5jWHBZeHVI)\n\n### 二、更新月度版本进度表\n**文档链接**：📈 **[每月版本进度表](https://vd9f7c2663.docs.qq.com/desktop/mydoc/folder/FrklJEZfoWnIaodTPI)**\n\n### 三、补充会议纪要\n**文档链接**：🗓️ **[2026年会议纪要](https://vd9f7c2663.docs.qq.com/sheet/DRkhpeEhRTUdSbkdrTHRadUtE?tab=000001)**"
+              },
+              "mentioned_list": ["@all"]
             }' \
             ${{ secrets.WECHAT_WEBHOOK_URL }}
